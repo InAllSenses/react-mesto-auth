@@ -3,22 +3,12 @@ import avatar from "../images/avatar.png";
 import { selectors, classes } from "../utils/constants";
 
 
-function handleEditAvatarClick() {
-  const popupElement = document.querySelector(selectors.popupEditAvatar);
-  popupElement.classList.add(classes.popupVisible);
-}
 
-function handleEditProfileClick() {
-  const popupElement = document.querySelector(selectors.popupEditUser);
-  popupElement.classList.add(classes.popupVisible);
-}
 
-function handleAddPlaceClick() {
-  const popupElement = document.querySelector(selectors.popupMakeCard);
-  popupElement.classList.add(classes.popupVisible);
-}
+function Main(props) {
 
-function Main() {
+
+
   return (
     <main>
       <section className="profile page__profile">
@@ -26,7 +16,7 @@ function Main() {
           <button
             type="button"
             className="profile__avatar-edit clickable-button"
-            onClick={handleEditAvatarClick}
+            onClick={props.onEditAvatar}
           ></button>
           <img className="profile__image" src={avatar} alt="аватар" />
         </div>
@@ -36,7 +26,7 @@ function Main() {
             <button
               type="button"
               className="profile__edit clickable-button"
-              onClick={handleEditProfileClick}
+              onClick={props.onEditProfile}
             ></button>
           </div>
           <p className="profile__subtitle">Исследователь океана</p>
@@ -44,7 +34,7 @@ function Main() {
         <button
           type="button"
           className="profile__add clickable-button"
-          onClick={handleAddPlaceClick}
+          onClick={props.onAddPlace}
         ></button>
       </section>
 
