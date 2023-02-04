@@ -1,15 +1,21 @@
 import avatar from "../images/avatar.png";
 
+import { selectors, classes } from "../utils/constants";
+
 
 function handleEditAvatarClick() {
+  const popupElement = document.querySelector(selectors.popupEditAvatar);
+  popupElement.classList.add(classes.popupVisible);
 }
 
 function handleEditProfileClick() {
-
+  const popupElement = document.querySelector(selectors.popupEditUser);
+  popupElement.classList.add(classes.popupVisible);
 }
 
 function handleAddPlaceClick() {
-  // popupMakeCard.open();
+  const popupElement = document.querySelector(selectors.popupMakeCard);
+  popupElement.classList.add(classes.popupVisible);
 }
 
 function Main() {
@@ -20,6 +26,7 @@ function Main() {
           <button
             type="button"
             className="profile__avatar-edit clickable-button"
+            onClick={handleEditAvatarClick}
           ></button>
           <img className="profile__image" src={avatar} alt="аватар" />
         </div>
@@ -29,6 +36,7 @@ function Main() {
             <button
               type="button"
               className="profile__edit clickable-button"
+              onClick={handleEditProfileClick}
             ></button>
           </div>
           <p className="profile__subtitle">Исследователь океана</p>
