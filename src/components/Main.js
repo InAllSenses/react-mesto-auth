@@ -4,6 +4,7 @@ import avatar from "../images/avatar.png";
 import { selectors, classes } from "../utils/constants";
 
 import api from "../utils/Api"
+import Card from "./Card";
 
 
 function Main(props) {
@@ -69,24 +70,7 @@ function Main(props) {
       <div className="elements page__elements">
         <ul className="elements__grid">
           {cards.map((item, i) => (
-            <li key={item._id} className="element">
-              <img
-                className="element__image clickable-button"
-                src={item.link}
-                alt="фото"
-              />
-              <button className="element__trashcan clickable-button"></button>
-              <div className="element__caption">
-                <h2 className="element__title">{item.name}</h2>
-                <div className="element__like">
-                  <button
-                    type="button"
-                    className="element__heart clickable-button"
-                  ></button>
-                  <p className="element__like-count">{item.likes.length}</p>
-                </div>
-              </div>
-            </li>
+            <Card data={item} />
           ))}
         </ul>
       </div>
