@@ -70,7 +70,7 @@ function Main(props) {
       <div className="elements page__elements">
         <ul className="elements__grid">
           {cards.map((item, i) => (
-            <Card data={item} onCardClick={props.onCardClick} />
+            <Card key={item._id} data={item} onCardClick={props.onCardClick} />
           ))}
         </ul>
       </div>

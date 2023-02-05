@@ -77,8 +77,8 @@ function App() {
           name="field-name"
           className="popup__input popup__input_type_name"
           placeholder="Имя"
-          minlength="2"
-          maxlength="40"
+          minLength="2"
+          maxLength="40"
           required
         />
         <span className="popup__input-error input-name-error"></span>
@@ -88,8 +88,8 @@ function App() {
           name="field-profession"
           className="popup__input popup__input_type_profession"
           placeholder="Профессия"
-          minlength="2"
-          maxlength="200"
+          minLength="2"
+          maxLength="200"
           required
         />
         <span className="popup__input-error input-profession-error"></span>
@@ -108,8 +108,8 @@ function App() {
           name="field-title"
           className="popup__input popup__input_type_title"
           placeholder="Название"
-          minlength="2"
-          maxlength="30"
+          minLength="2"
+          maxLength="30"
           required
         />
         <span className="popup__input-error input-place-error"></span>
@@ -154,7 +154,7 @@ function App() {
             className="popup__close popup-avatar__close clickable-button"
           ></button>
           <h2 className="popup__title">Обновить аватар</h2>
-          <form name="id-information" className="popup__information" novalidate>
+          <form name="id-information" className="popup__information" noValidate>
             <input
               id="input-avatar"
               type="url"
