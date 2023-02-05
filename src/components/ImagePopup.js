@@ -1,10 +1,8 @@
-import { classes } from "../utils/constants";
-
 function ImagePopup(props) {
-
+  const popupVisibleClass = "popup_opened";
 
   return (
-    <div className={`popup popup-image ${props.card ? classes.popupVisible : ""}`}>
+    <div className={`popup popup-image ${props.card ? popupVisibleClass : ""}`}>
       <figure className="popup-image__container">
         <button
           type="button"
@@ -16,7 +14,9 @@ function ImagePopup(props) {
           src={props.card && props.card.link}
           alt="картинка не загрузилась"
         />
-        <figcaption className="popup-image__title">{props.card && props.card.name}</figcaption>
+        <figcaption className="popup-image__title">
+          {props.card && props.card.name}
+        </figcaption>
       </figure>
     </div>
   );

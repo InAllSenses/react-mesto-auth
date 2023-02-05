@@ -7,22 +7,23 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   
 
   function handleEditAvatarClick() {
-    setEditAvatarPopupOpen(true);
+    setIsEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    setEditProfilePopupOpen(true);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
-    setAddPlacePopupOpen(true);
+    setIsAddPlacePopupOpen(true);
   }
 
   function handleCardClick(cardData) {
@@ -30,9 +31,10 @@ function App() {
   }
 
   function closeAllPopups() {
-    setEditAvatarPopupOpen(false);
-    setAddPlacePopupOpen(false);
-    setEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsDeletePlacePopupOpen(false);
     setSelectedCard(null);
   }
 
@@ -124,55 +126,17 @@ function App() {
         <span className="popup__input-error input-url-error"></span>
       </PopupWithForm>
 
+      <PopupWithForm
+        name="delete"
+        title="Вы уверены?"
+        buttonTitle="Да"
+        isOpen={isDeletePlacePopupOpen}
+        onClose={closeAllPopups}
+      >
+      </PopupWithForm>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-      <div className="popup popup-delete">
-        <div className="popup__container">
-          <button
-            type="button"
-            className="popup__close clickable-button"
-          ></button>
-          <h2 className="popup__title">Вы уверены?</h2>
-          <button
-            type="button"
-            className="popup__button popup__button_delete clickable-button"
-          >
-            Да
-          </button>
-        </div>
-      </div>
-
-      <div className="popup popup-image">
-
-      </div>
-
-      <div className="popup popup-avatar">
-        <div className="popup__container">
-          <button
-            type="button"
-            className="popup__close popup-avatar__close clickable-button"
-          ></button>
-          <h2 className="popup__title">Обновить аватар</h2>
-          <form name="id-information" className="popup__information" noValidate>
-            <input
-              id="input-avatar"
-              type="url"
-              name="field-avatar"
-              className="popup__input popup__input_type_avatar"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span className="popup__input-error input-avatar-error"></span>
-            <button
-              type="submit"
-              className="popup__button popup__button_avatar clickable-button"
-            >
-              Сохранить
-            </button>
-          </form>
-        </div>
-      </div>
       <Footer />
     </div>
   );

@@ -1,6 +1,3 @@
-import { apiConstants } from "./constants"
-
-
 class Api {
   constructor(token, baseUrl) {
     this._token = token;
@@ -91,30 +88,9 @@ class Api {
 
 
 // INITIALIZATION
-const api = new Api(apiConstants.token, apiConstants.baseUrl);
+const apiToken = "1131d0bd-5b8f-45fb-8061-570667973a92";
+const apiBaseUrl = "https://mesto.nomoreparties.co/v1/cohort-50";
+
+const api = new Api(apiToken, apiBaseUrl);
 
 export default api;
-
-// api
-//   .getUserInfo()
-//   .then((data) => {
-//     // 1. set user info
-//     userInfo.setUserInfo({
-//       name: data.name,
-//       info: data.about,
-//     });
-
-//     userInfo.setAvatar(data.avatar);
-//     userInfo.setId(data._id);
-//   })
-//   .then(() => {
-//     // 2. get cards
-//     return api.getInitialCards();
-//   })
-//   .then((items) => {
-//     // 3. make cards
-//     cardsList.renderItems(items);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });

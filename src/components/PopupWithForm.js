@@ -1,11 +1,8 @@
-import { classes } from "../utils/constants"
-
 function PopupWithForm(props) {
-
-
+  const popupVisibleClass = "popup_opened";
 
   return (
-    <div className={`popup popup-${props.name} ${props.isOpen ? classes.popupVisible : ''}`}>
+    <div className={`popup popup-${props.name} ${ props.isOpen ? popupVisibleClass : "" }`}>
       <div className="popup__container">
         <button
           type="button"
@@ -15,10 +12,7 @@ function PopupWithForm(props) {
         <h2 className="popup__title">{props.title}</h2>
         <form name="id-information" className="popup__information" noValidate>
           {props.children}
-          <button
-            type="submit"
-            className="popup__button clickable-button"
-          >
+          <button type="submit" className="popup__button clickable-button">
             {props.buttonTitle}
           </button>
         </form>

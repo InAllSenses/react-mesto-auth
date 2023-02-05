@@ -1,8 +1,6 @@
 import React from "react";
 import avatar from "../images/avatar.png";
 
-import { selectors, classes } from "../utils/constants";
-
 import api from "../utils/Api"
 import Card from "./Card";
 
