@@ -1,6 +1,7 @@
 export default function Card(props) {
-
-
+  function handleCardClick() {
+    props.onCardClick(props.data);
+  }
 
   return (
     <li key={props.data._id} className="element">
@@ -8,6 +9,7 @@ export default function Card(props) {
         className="element__image clickable-button"
         src={props.data.link}
         alt="фото"
+        onClick={handleCardClick}
       />
       <button className="element__trashcan clickable-button"></button>
       <div className="element__caption">

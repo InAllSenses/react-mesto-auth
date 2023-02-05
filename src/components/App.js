@@ -4,11 +4,13 @@ import Main from "./Main";
 import React from "react";
 
 import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
   
 
   function handleEditAvatarClick() {
@@ -23,10 +25,15 @@ function App() {
     setAddPlacePopupOpen(true);
   }
 
+  function handleCardClick(cardData) {
+    setSelectedCard(cardData);
+  }
+
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
     setAddPlacePopupOpen(false);
     setEditProfilePopupOpen(false);
+    setSelectedCard(null);
   }
 
   return (
@@ -36,6 +43,7 @@ function App() {
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
       />
 
       <PopupWithForm
@@ -116,6 +124,9 @@ function App() {
         <span className="popup__input-error input-url-error"></span>
       </PopupWithForm>
 
+
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
       <div className="popup popup-delete">
         <div className="popup__container">
           <button
@@ -133,18 +144,7 @@ function App() {
       </div>
 
       <div className="popup popup-image">
-        <figure className="popup-image__container">
-          <button
-            type="button"
-            className="popup__close popup-image__close clickable-button"
-          ></button>
-          <img
-            className="popup-image__picture"
-            src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg"
-            alt="картинка не загрузилась"
-          />
-          <figcaption className="popup-image__title">подпись</figcaption>
-        </figure>
+
       </div>
 
       <div className="popup popup-avatar">
