@@ -11,21 +11,30 @@ function Main(props) {
   const [userName, setUserName] = React.useState("Жак-Ив Кусто");
   const [userDescription, setUserDescription] = React.useState("Исследователь океана");
   const [userAvatar, setUserAvatar] = React.useState(avatar);
+  const [cards, setCards] = React.useState([]);
 
-
+  
   React.useEffect(() => {
     api.getUserInfo()
     .then((data) => {
       setUserName(data.name);
       setUserDescription(data.about);
       setUserAvatar(data.avatar);
+    })
+    .then(() => {
+      return api.getInitialCards();
+    })
+    .then((data) => {
+      setCards(data);
       console.log(data);
     })
     .catch((err) => {
       console.log(err);
     });
 
-  }, [userName, userDescription, userAvatar]);
+  }, []);
+
+
 
 
   return (
@@ -59,24 +68,26 @@ function Main(props) {
 
       <div className="elements page__elements">
         <ul className="elements__grid">
-          <template className="template__element">
-            <li className="element">
-              <img className="element__image clickable-button"
-                src=""
-                alt="замок на горе" />
+          {cards.map((item, i) => (
+            <li key={item._id} className="element">
+              <img
+                className="element__image clickable-button"
+                src={item.link}
+                alt="фото"
+              />
               <button className="element__trashcan clickable-button"></button>
               <div className="element__caption">
-                <h2 className="element__title"></h2>
+                <h2 className="element__title">{item.name}</h2>
                 <div className="element__like">
                   <button
                     type="button"
                     className="element__heart clickable-button"
                   ></button>
-                  <p className="element__like-count">0</p>
+                  <p className="element__like-count">{item.likes.length}</p>
                 </div>
               </div>
             </li>
-          </template>
+          ))}
         </ul>
       </div>
     </main>
