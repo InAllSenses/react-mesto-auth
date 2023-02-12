@@ -83,6 +83,15 @@ class Api {
       headers: this._headers,
     }).then(this._handleFetchResult);
   }
+
+  changeLikeCardStatus(cardId, newStatus) {
+    if (newStatus) {
+      return this.putLike(cardId);
+    }
+    else {
+      return this.deleteLike(cardId);
+    }
+  }
 }
 
 
