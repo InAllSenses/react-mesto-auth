@@ -24,13 +24,13 @@ class Api {
     }).then(this._handleFetchResult);
   }
 
-  patchUserInfo({ name, info }) {
+  patchUserInfo({ name, about }) {
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        about: info,
+        name,
+        about,
       }),
     }).then(this._handleFetchResult);
   }
