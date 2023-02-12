@@ -1,10 +1,18 @@
+import React from "react";
+
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
-import React from "react";
-
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+
+import api from "../utils/Api";
+
+import avatar from "../images/avatar.png";
+
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
+
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -12,6 +20,22 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
+
+  const [currentUser, setCurrentUser] = React.useState({
+    name: "Жак-Ив Кусто",
+    about: "Исследователь океана",
+    avatar: avatar
+  });
+
+  React.useEffect(() => {
+    api.getUserInfo()
+    .then((data) => {
+      setCurrentUser(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, []);
   
 
   function handleEditAvatarClick() {
@@ -40,104 +64,106 @@ function App() {
 
   return (
     <div className="page">
-      <Header />
-      <Main
-        onEditAvatar={handleEditAvatarClick}
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        onCardClick={handleCardClick}
-      />
-
-      <PopupWithForm
-        name="avatar"
-        title="Обновить аватар"
-        buttonTitle="Сохранить"
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-      >
-        <input
-          id="input-avatar"
-          type="url"
-          name="field-avatar"
-          className="popup__input popup__input_type_avatar"
-          placeholder="Ссылка на картинку"
-          required
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header />
+        <Main
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onCardClick={handleCardClick}
         />
-        <span className="popup__input-error input-avatar-error"></span>
-      </PopupWithForm>
 
-      <PopupWithForm
-        name="edit"
-        title="Редактировать профиль"
-        buttonTitle="Сохранить"
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-      >
-        <input
-          id="input-name"
-          type="text"
-          name="field-name"
-          className="popup__input popup__input_type_name"
-          placeholder="Имя"
-          minLength="2"
-          maxLength="40"
-          required
-        />
-        <span className="popup__input-error input-name-error"></span>
-        <input
-          id="input-profession"
-          type="text"
-          name="field-profession"
-          className="popup__input popup__input_type_profession"
-          placeholder="Профессия"
-          minLength="2"
-          maxLength="200"
-          required
-        />
-        <span className="popup__input-error input-profession-error"></span>
-      </PopupWithForm>
+        <PopupWithForm
+          name="avatar"
+          title="Обновить аватар"
+          buttonTitle="Сохранить"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+        >
+          <input
+            id="input-avatar"
+            type="url"
+            name="field-avatar"
+            className="popup__input popup__input_type_avatar"
+            placeholder="Ссылка на картинку"
+            required
+          />
+          <span className="popup__input-error input-avatar-error"></span>
+        </PopupWithForm>
 
-      <PopupWithForm
-        name="add"
-        title="Новое место"
-        buttonTitle="Создать"
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}
-      >
-        <input
-          id="input-place"
-          type="text"
-          name="field-title"
-          className="popup__input popup__input_type_title"
-          placeholder="Название"
-          minLength="2"
-          maxLength="30"
-          required
-        />
-        <span className="popup__input-error input-place-error"></span>
-        <input
-          id="input-url"
-          type="url"
-          name="field-link"
-          className="popup__input popup__input_type_link"
-          placeholder="Ссылка на картинку"
-          required
-        />
-        <span className="popup__input-error input-url-error"></span>
-      </PopupWithForm>
+        <PopupWithForm
+          name="edit"
+          title="Редактировать профиль"
+          buttonTitle="Сохранить"
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+        >
+          <input
+            id="input-name"
+            type="text"
+            name="field-name"
+            className="popup__input popup__input_type_name"
+            placeholder="Имя"
+            minLength="2"
+            maxLength="40"
+            required
+          />
+          <span className="popup__input-error input-name-error"></span>
+          <input
+            id="input-profession"
+            type="text"
+            name="field-profession"
+            className="popup__input popup__input_type_profession"
+            placeholder="Профессия"
+            minLength="2"
+            maxLength="200"
+            required
+          />
+          <span className="popup__input-error input-profession-error"></span>
+        </PopupWithForm>
 
-      <PopupWithForm
-        name="delete"
-        title="Вы уверены?"
-        buttonTitle="Да"
-        isOpen={isDeletePlacePopupOpen}
-        onClose={closeAllPopups}
-      >
-      </PopupWithForm>
+        <PopupWithForm
+          name="add"
+          title="Новое место"
+          buttonTitle="Создать"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+        >
+          <input
+            id="input-place"
+            type="text"
+            name="field-title"
+            className="popup__input popup__input_type_title"
+            placeholder="Название"
+            minLength="2"
+            maxLength="30"
+            required
+          />
+          <span className="popup__input-error input-place-error"></span>
+          <input
+            id="input-url"
+            type="url"
+            name="field-link"
+            className="popup__input popup__input_type_link"
+            placeholder="Ссылка на картинку"
+            required
+          />
+          <span className="popup__input-error input-url-error"></span>
+        </PopupWithForm>
 
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <PopupWithForm
+          name="delete"
+          title="Вы уверены?"
+          buttonTitle="Да"
+          isOpen={isDeletePlacePopupOpen}
+          onClose={closeAllPopups}
+        >
+        </PopupWithForm>
 
-      <Footer />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
+        <Footer />
+      </CurrentUserContext.Provider>
     </div>
   );
 }
