@@ -11,11 +11,11 @@ function ImagePopup(props) {
         ></button>
         <img
           className="popup-image__picture"
-          src={props.card && props.card.link}
+          src={props.card?.link}
           alt="картинка не загрузилась"
         />
         <figcaption className="popup-image__title">
-          {props.card && props.card.name}
+          {props.card?.name}
         </figcaption>
       </figure>
     </div>
