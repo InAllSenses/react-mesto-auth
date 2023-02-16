@@ -3,7 +3,7 @@
 <div className="sign-form">
     <div className="header">
         <div className="header__logo"></div>
-        <p className="sign-form__entrance"></p>
+        <p className="header__status"></p>
     </div>
     <div className="sign-form__container">
         <h1 className="sign-form__title"></h1>

@@ -16,3 +16,8 @@
     text-align: center;
     color: #000;
 }
+
+.sign-form__up:hover {
+    opacity: 0.85;
+    cursor: pointer;
+}

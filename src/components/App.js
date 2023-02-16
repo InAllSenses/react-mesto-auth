@@ -3,13 +3,15 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
+import Register from "./Register.js";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
-    import PopupInfoTooltip from "./InfoTooltip"
+    import PopupInfoTooltip from "./InfoTooltip";
+
 
 
 import api from "../utils/Api";
@@ -162,11 +164,15 @@ function App() {
           onCardDelete={handleCardDelete}
         /> */}
 
+        <Register
+
+        />
+
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
 
-            <PopupInfoTooltip isOpen={isPopupInfoTooltipOpen} onClose={closeAllPopups} onAddPlace={handlePopupInfoTooltipClick} />
+            <PopupInfoTooltip isOpen={isPopupInfoTooltipOpen} onClose={closeAllPopups} />
 
         <PopupWithForm
           name="delete"

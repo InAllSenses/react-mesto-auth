@@ -10,3 +10,8 @@
     margin: 15px auto 0;
     padding: 0;
 }
+
+.sign-form__in:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}

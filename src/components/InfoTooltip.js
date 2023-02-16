@@ -4,14 +4,15 @@ function PopupInfoTooltip(props) {
   const popupVisibleClass = "popup_opened";
 
   return (
-    <div className="popup popup-infoTooltip popup_opened">
-      <div className="popup__container popup-infoTooltip__container">
+    <div className="popup popup-infotooltip">
+      <div className="popup__container popup-infotooltip__container">
         <button
           type="button"
-          className="popup__close popup-infoTooltip__close"
+          className="popup__close clickable-button"
+          onClick={props.onClose}
         ></button>
-        <img className="popup-infoTooltip__result" src={correct} alt="" />
-        <h1 className="popup-infoTooltip__text">
+        <img className="popup-infotooltip__result" src={correct} alt="" />
+        <h1 className="popup-infotooltip__text">
           Вы успешно зарегистрировались!
         </h1>
       </div>

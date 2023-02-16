@@ -22,6 +22,7 @@
 /* Header */
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__status/header__status.css);
 
 @import url(./blocks/root-class/root-class.css);
 
@@ -37,7 +38,6 @@
 @import url(./blocks/sign-form/__info/sign-form__info.css);
 @import url(./blocks/sign-form/__title/sign-form__title.css);
 @import url(./blocks/sign-form/__up/sign-form__up.css);
-@import url(./blocks/sign-form/__entrance/sign-form__entrance.css);
 
 /* Popup */
 @import url(./blocks/popup/popup.css);
@@ -62,10 +62,10 @@
 @import url(./blocks/popup-image/__position/popup-image__position.css);
 
 /* Popup-infoTooltip */
-@import url(./blocks/popup-infoTooltip/popup-infoTooltip.css);
-@import url(./blocks/popup-infoTooltip/__container/popup-infoTooltip__container.css);
-@import url(./blocks/popup-infoTooltip/__result/popup-infoTooltip__result.css);
-@import url(./blocks/popup-infoTooltip/__text/popup-infoTooltip__text.css);
+@import url(./blocks/popup-infotooltip/popup-infotooltip.css);
+@import url(./blocks/popup-infotooltip/__container/popup-infotooltip__container.css);
+@import url(./blocks/popup-infotooltip/__result/popup-infotooltip__result.css);
+@import url(./blocks/popup-infotooltip/__text/popup-infotooltip__text.css);
 
 /* Profile */
 @import url(./blocks/profile/profile.css);
