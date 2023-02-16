@@ -1,0 +1,15 @@
+.sign-form__info {
+    height: 27px;
+    width: 358px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #CCCCCC;
+
+    border-bottom: 2px solid #ccc;
+    
+    margin: 30px auto 0;
+}

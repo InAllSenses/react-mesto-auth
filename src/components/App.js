@@ -9,6 +9,9 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
+    import PopupInfoTooltip from "./InfoTooltip"
+
+
 import api from "../utils/Api";
 
 import avatar from "../images/avatar.png";
@@ -16,12 +19,14 @@ import avatar from "../images/avatar.png";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 
-
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = React.useState(false);
+
+      const [isPopupInfoTooltipOpen, setIsPopupInfoTooltipOpen] = React.useState(false);
+
 
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
@@ -70,11 +75,19 @@ function App() {
     setSelectedCard(cardData);
   }
 
+      function handlePopupInfoTooltipClick() {
+        setIsPopupInfoTooltipOpen(true);
+      }
+
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsDeletePlacePopupOpen(false);
+
+        setIsPopupInfoTooltipOpen(false);
+
     setSelectedCard(null);
   }
 
@@ -139,7 +152,7 @@ function App() {
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        <Main
+        {/* <Main
           cards={cards}
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
@@ -147,11 +160,13 @@ function App() {
           onCardClick={handleCardClick}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
-        />
+        /> */}
 
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
+
+            <PopupInfoTooltip isOpen={isPopupInfoTooltipOpen} onClose={closeAllPopups} onAddPlace={handlePopupInfoTooltipClick} />
 
         <PopupWithForm
           name="delete"

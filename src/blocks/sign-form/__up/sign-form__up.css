@@ -1,0 +1,18 @@
+.sign-form__up {
+    width: 358px;
+    height: 50px;
+
+    background: #FFF;
+    border-radius: 2px;
+
+    margin: 216px auto 0;
+    padding: 0;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000;
+}
