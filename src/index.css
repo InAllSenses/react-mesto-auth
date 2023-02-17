@@ -38,6 +38,7 @@
 @import url(./blocks/sign-form/__info/sign-form__info.css);
 @import url(./blocks/sign-form/__title/sign-form__title.css);
 @import url(./blocks/sign-form/__up/sign-form__up.css);
+@import url(./blocks/sign-form/__link/sign-form__link.css);
 
 /* Popup */
 @import url(./blocks/popup/popup.css);

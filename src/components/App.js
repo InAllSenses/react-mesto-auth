@@ -12,13 +12,15 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
     import PopupInfoTooltip from "./InfoTooltip";
-    import { Routes, Route } from 'react-router-dom';
-
+    import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+    import NavBar from './NavBar';
+    import ProtectedRouteElement from "./ProtectedRoute";
 
 import api from "../utils/Api";
 
 import avatar from "../images/avatar.png";
 import correct from "../images/correct.svg";
+import incorrect from "../images/incorrect.svg";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -29,8 +31,8 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = React.useState(false);
 
-      const [isPopupInfoTooltipOpen, setIsPopupInfoTooltipOpen] = React.useState(false);
-
+      const [isPopupInfoTooltipCorrectOpen, setIsPopupInfoTooltipCorrectOpen] = React.useState(false);
+      const [isPopupInfoTooltipIncorrectOpen, setIsPopupInfoTooltipIncorrectOpen] = React.useState(false);
 
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
@@ -40,6 +42,8 @@ function App() {
     about: "Исследователь океана",
     avatar: avatar
   });
+
+  const [ loggedIn, setLoggedIn ] = React.useState(false);
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -61,7 +65,8 @@ function App() {
     });
 
   }, []);
-  
+
+
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -79,8 +84,12 @@ function App() {
     setSelectedCard(cardData);
   }
 
-      function handlePopupInfoTooltipClick() {
-        setIsPopupInfoTooltipOpen(true);
+      function handlePopupInfoTooltipCorrectClick() {
+        setIsPopupInfoTooltipCorrectOpen(true);
+      }
+
+      function handlePopupInfoTooltipIncorretClick() {
+        setIsPopupInfoTooltipIncorrectOpen(true);
       }
 
 
@@ -90,7 +99,8 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsDeletePlacePopupOpen(false);
 
-        setIsPopupInfoTooltipOpen(false);
+        setIsPopupInfoTooltipCorrectOpen(false);
+        setIsPopupInfoTooltipIncorrectOpen(false);
 
     setSelectedCard(null);
   }
@@ -152,12 +162,16 @@ function App() {
     });
   }
 
+
   return (
+
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
-            <Routes>
-                <Route path="/" element={
+        <Header 
+        />
+        {/* {loggedIn && <NavBar />} */}
+              <Routes>
+                <Route path="/" element={<ProtectedRouteElement element={
                 <Main
           cards={cards}
           onEditAvatar={handleEditAvatarClick}
@@ -166,19 +180,19 @@ function App() {
           onCardClick={handleCardClick}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
-          />}></Route>
-                <Route path="/sign-up" element={<Register onRegisterClick={handlePopupInfoTooltipClick} />} />
-                <Route path="/sign-in" element={<Login />} />
+          loggedIn={loggedIn}/>} />}></Route>
+                
+                <Route path="/sign-up" element={<Register onRegisterClick={handlePopupInfoTooltipCorrectClick} />} />
+                <Route path="/sign-in" element={<Login/>} />
+                <Route path="/" element={loggedIn ? <Navigate to="/" replace /> : <Navigate to="/Login" replace />} />
             </Routes>
-
-
         
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
 
-            <PopupInfoTooltip isOpen={isPopupInfoTooltipOpen} onClose={closeAllPopups} title={"Вы успешно зарегистрированы!"} image={correct}/>
-            {/* <PopupInfoTooltip isOpen={isPopupInfoTooltipIncorrectOpen} onClose={closeAllPopups} title={"Что-то пошло не так! Попробуйте ещё раз."} /> */}
+            <PopupInfoTooltip isOpen={isPopupInfoTooltipCorrectOpen} onClose={closeAllPopups} title={"Вы успешно зарегистрированы!"} image={correct} />
+            <PopupInfoTooltip isOpen={isPopupInfoTooltipIncorrectOpen} onClose={closeAllPopups} title={"Что-то пошло не так! Попробуйте ещё раз."} image={incorrect} />
 
         <PopupWithForm
           name="delete"
@@ -195,6 +209,7 @@ function App() {
         <Footer />
       </CurrentUserContext.Provider>
     </div>
+
   );
 }
 

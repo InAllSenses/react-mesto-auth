@@ -7,9 +7,15 @@ function Login(props) {
 <div className="sign-form">
     <div className="sign-form__container">
         <h1 className="sign-form__title">Войти</h1>
-        <form className="sign-form__info">Email</form>
-        <form className="sign-form__info">Пароль</form>
-    <button className="sign-form__up">Войти</button>
+        <form>
+            <label>
+          <input required id="email" name="email" type="email" placeholder="Email" className="sign-form__info" />
+          </label>
+          <label>
+          <input required id="password" name="password" type="password" placeholder="Пароль" className="sign-form__info" />
+          </label>
+          </form>
+        <button type="submit" className="sign-form__up" onClick={props.onLoginClick}>Войти</button>
     </div>
 </div>
 </main>
