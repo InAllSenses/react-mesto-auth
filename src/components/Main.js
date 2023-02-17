@@ -2,7 +2,7 @@ import React from "react";
 
 import Card from "./Card";
 
-import api from "../utils/Api"
+import { api } from "../utils/Api"
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 

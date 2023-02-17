@@ -12,11 +12,11 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
     import PopupInfoTooltip from "./InfoTooltip";
-    import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+    import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
     import NavBar from './NavBar';
     import ProtectedRouteElement from "./ProtectedRoute";
 
-import api from "../utils/Api";
+import { api, apiAuth } from "../utils/Api";
 
 import avatar from "../images/avatar.png";
 import correct from "../images/correct.svg";
@@ -44,6 +44,8 @@ function App() {
   });
 
   const [ loggedIn, setLoggedIn ] = React.useState(false);
+
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -84,13 +86,34 @@ function App() {
     setSelectedCard(cardData);
   }
 
-      function handlePopupInfoTooltipCorrectClick() {
-        setIsPopupInfoTooltipCorrectOpen(true);
-      }
+  function handleRegister(email, password) {
+    apiAuth.register(email, password)
+    .then((data) => {
+      navigate("/sign-in", { replace: true });
+      setIsPopupInfoTooltipCorrectOpen(true);
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsPopupInfoTooltipIncorrectOpen(true);
+    });
+  }
 
-      function handlePopupInfoTooltipIncorretClick() {
-        setIsPopupInfoTooltipIncorrectOpen(true);
-      }
+  function handleLogin(email, password) {
+    apiAuth.authorize(email, password)
+    .then((data) => {
+      console.log(data);
+      setLoggedIn(true);
+      navigate("/", { replace: true });
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsPopupInfoTooltipIncorrectOpen(true);
+    });
+  }
+
+  function handlePopupInfoTooltipIncorretClick() {
+    setIsPopupInfoTooltipIncorrectOpen(true);
+  }
 
 
   function closeAllPopups() {
@@ -167,24 +190,19 @@ function App() {
 
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header 
-        />
-        {/* {loggedIn && <NavBar />} */}
+        <Header />
               <Routes>
-                <Route path="/" element={<ProtectedRouteElement element={
-                <Main
-          cards={cards}
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-          loggedIn={loggedIn}/>} />}></Route>
-                
-                <Route path="/sign-up" element={<Register onRegisterClick={handlePopupInfoTooltipCorrectClick} />} />
-                <Route path="/sign-in" element={<Login/>} />
-                <Route path="/" element={loggedIn ? <Navigate to="/" replace /> : <Navigate to="/Login" replace />} />
+                <Route path="/" element={<ProtectedRouteElement loggedIn={loggedIn} element={Main}
+                                          cards={cards}
+                                          onEditAvatar={handleEditAvatarClick}
+                                          onEditProfile={handleEditProfileClick}
+                                          onAddPlace={handleAddPlaceClick}
+                                          onCardClick={handleCardClick}
+                                          onCardLike={handleCardLike}
+                                          onCardDelete={handleCardDelete} />} />
+        
+                <Route path="/sign-up" element={<Register onSubmit={handleRegister} />} />
+                <Route path="/sign-in" element={<Login onSubmit={handleLogin} />} />
             </Routes>
         
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
