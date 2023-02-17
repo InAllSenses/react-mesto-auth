@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
 import Register from "./Register.js";
+import Login from "./Login.js";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
@@ -11,12 +12,13 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
     import PopupInfoTooltip from "./InfoTooltip";
-
+    import { Routes, Route } from 'react-router-dom';
 
 
 import api from "../utils/Api";
 
 import avatar from "../images/avatar.png";
+import correct from "../images/correct.svg";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -154,7 +156,9 @@ function App() {
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        {/* <Main
+            <Routes>
+                <Route path="/" element={
+                <Main
           cards={cards}
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
@@ -162,17 +166,19 @@ function App() {
           onCardClick={handleCardClick}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
-        /> */}
+          />}></Route>
+                <Route path="/sign-up" element={<Register onRegisterClick={handlePopupInfoTooltipClick} />} />
+                <Route path="/sign-in" element={<Login />} />
+            </Routes>
 
-        <Register
 
-        />
-
+        
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
 
-            <PopupInfoTooltip isOpen={isPopupInfoTooltipOpen} onClose={closeAllPopups} />
+            <PopupInfoTooltip isOpen={isPopupInfoTooltipOpen} onClose={closeAllPopups} title={"Вы успешно зарегистрированы!"} image={correct}/>
+            {/* <PopupInfoTooltip isOpen={isPopupInfoTooltipIncorrectOpen} onClose={closeAllPopups} title={"Что-то пошло не так! Попробуйте ещё раз."} /> */}
 
         <PopupWithForm
           name="delete"
@@ -184,6 +190,7 @@ function App() {
         </PopupWithForm>
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
 
         <Footer />
       </CurrentUserContext.Provider>

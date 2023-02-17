@@ -1,5 +1,8 @@
-function Register(props) {
+import React from "react";
+import { Link } from "react-router-dom";
 
+function Register(props) {
+   
   return (
     <main>
       <div className="sign-form">
@@ -9,8 +12,8 @@ function Register(props) {
           <form className="sign-form__info">Email</form>
           <form className="sign-form__info">Пароль</form>
           
-          <button className="sign-form__up">Зарегистрироваться</button>
-          <p className="sign-form__in">Уже зарегистрированы? Войти</p>
+          <button className="sign-form__up" onClick={props.onRegisterClick}>Зарегистрироваться</button>
+          <p className="sign-form__in">Уже зарегистрированы?<Link to="/sign-in"> Войти</Link></p>
         </div>
       </div>
     </main>
