@@ -1,0 +1,19 @@
+.header__status {
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+text-decoration: none;
+text-align: right;
+
+color: #FFFFFF;
+
+margin: 6px 0 46px 24px;
+padding: 0;
+}
+
+.header__status:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}

@@ -1,0 +1,29 @@
+.profile__edit {
+    background-image: url(../../../images/pencil.svg);
+    background-color: rgba(0, 0, 0, 0.0);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10px;
+
+    width: 24px;
+    height: 24px;
+
+    box-sizing: border-box;
+    border: 1px solid #fff;
+
+    margin: auto 0 auto 18px;
+}
+
+.profile__edit:hover {
+    opacity: 0.6;
+    transition: 0.5;
+}
+
+@media screen and (max-width: 850px) {
+    .profile__edit {
+        width: 18px;
+        height: 18px;
+        margin-left: 10px;
+        background-size: 7.5px;
+    }
+}
