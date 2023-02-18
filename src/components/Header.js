@@ -2,11 +2,11 @@ import logo from "../images/logo.svg";
 import React from 'react';
 import NavBar from "./NavBar";
 
-function Header() {
+function Header(props) {
     return(
         <header className="header">
             <img className="header__logo" src={logo} alt="логотип" />
-            <NavBar></NavBar>
+            <NavBar userEmail={props.userEmail}></NavBar>
         </header>
     );
 }

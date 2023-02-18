@@ -44,6 +44,7 @@ function App() {
   });
 
   const [ loggedIn, setLoggedIn ] = React.useState(false);
+  const [authInfo, setAuthInfo] = React.useState({});
 
   const navigate = useNavigate();
 
@@ -67,6 +68,30 @@ function App() {
     });
 
   }, []);
+
+  function checkToken() {
+    const token = localStorage.getItem("token");
+    if (token !== null) {
+      apiAuth.checkToken(token)
+      .then((data) => {
+        console.log(data);
+        setAuthInfo(data);
+        setLoggedIn(true);
+        navigate("/", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        if (loggedIn) {
+          setAuthInfo({});
+          setLoggedIn(false);
+        }
+      });
+    }
+  }
+
+  React.useEffect(() => {
+    checkToken();
+  }, [])
 
 
 
@@ -102,8 +127,11 @@ function App() {
     apiAuth.authorize(email, password)
     .then((data) => {
       console.log(data);
-      setLoggedIn(true);
-      navigate("/", { replace: true });
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        checkToken();
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -190,9 +218,9 @@ function App() {
 
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header userEmail={authInfo.data?.email} />
               <Routes>
-                <Route path="/" element={<ProtectedRouteElement loggedIn={loggedIn} element={Main}
+                <Route path="/" element={<ProtectedRouteElement loggedIn={loggedIn} element={Main} navigateTo="/sign-up"
                                           cards={cards}
                                           onEditAvatar={handleEditAvatarClick}
                                           onEditProfile={handleEditProfileClick}

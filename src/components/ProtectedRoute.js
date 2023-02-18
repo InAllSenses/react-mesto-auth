@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Redirect, Navigate } from "react-router-dom";
 
-const ProtectedRouteElement = ({ element: Component, ...props }) => {
-  return props.loggedIn ? (
+const ProtectedRouteElement = ({ element: Component, loggedIn: loggedIn, navigateTo: navigateTo, ...props }) => {
+  return loggedIn ? (
     <Component {...props} />
   ) : (
-    <Navigate to="/sign-up" replace />
+    <Navigate to={navigateTo} replace />
   );
 };
 

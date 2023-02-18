@@ -1,0 +1,4 @@
+.header__logged {
+    display: flex;
+    flex-direction: row;
+}

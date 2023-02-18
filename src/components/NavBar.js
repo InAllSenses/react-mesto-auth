@@ -1,16 +1,31 @@
-import React from 'react';
-import { NavLink, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { NavLink, Routes, Route } from "react-router-dom";
 
-function NavBar() {
+function NavBar(props) {
   return (
     <nav>
-        <Routes>
-    <Route path={"/sign-up"} element={<NavLink to="/sign-in" className="header__status">Войти</NavLink> } />
-    <Route path={"/sign-in"} element={<NavLink to="/sign-up" className="header__status">Регистрация</NavLink> } />
-    <Route path={"/"} element={<NavLink to="/" className="header__status">Выйти</NavLink> } />
-        </Routes>
+      <Routes>
+        <Route path={"/sign-up"} element={
+            <NavLink to="/sign-in" className="header__status">
+              Войти
+            </NavLink>
+          }
+        />
+        <Route path={"/sign-in"} element={
+            <NavLink to="/sign-up" className="header__status">
+              Регистрация
+            </NavLink>
+          }
+        />
+        <Route path={"/"} element={
+            <div className="header__logged">
+                <p className="header__status">{props.userEmail}</p>
+                <NavLink to="/" className="header__status">Выйти</NavLink>
+            </div>
+          }
+        />
+      </Routes>
     </nav>
-
   );
 }
 
