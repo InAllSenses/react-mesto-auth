@@ -11,10 +11,9 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
-    import PopupInfoTooltip from "./InfoTooltip";
-    import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-    import NavBar from './NavBar';
-    import ProtectedRouteElement from "./ProtectedRoute";
+import PopupInfoTooltip from "./InfoTooltip";
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import ProtectedRouteElement from "./ProtectedRoute";
 
 import { api, apiAuth } from "../utils/Api";
 
@@ -31,8 +30,8 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = React.useState(false);
 
-      const [isPopupInfoTooltipCorrectOpen, setIsPopupInfoTooltipCorrectOpen] = React.useState(false);
-      const [isPopupInfoTooltipIncorrectOpen, setIsPopupInfoTooltipIncorrectOpen] = React.useState(false);
+  const [isPopupInfoTooltipCorrectOpen, setIsPopupInfoTooltipCorrectOpen] = React.useState(false);
+  const [isPopupInfoTooltipIncorrectOpen, setIsPopupInfoTooltipIncorrectOpen] = React.useState(false);
 
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
@@ -139,19 +138,14 @@ function App() {
     });
   }
 
-  function handlePopupInfoTooltipIncorretClick() {
-    setIsPopupInfoTooltipIncorrectOpen(true);
-  }
-
-
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsDeletePlacePopupOpen(false);
 
-        setIsPopupInfoTooltipCorrectOpen(false);
-        setIsPopupInfoTooltipIncorrectOpen(false);
+    setIsPopupInfoTooltipCorrectOpen(false);
+    setIsPopupInfoTooltipIncorrectOpen(false);
 
     setSelectedCard(null);
   }
@@ -213,45 +207,40 @@ function App() {
     });
   }
 
+  function handleLogout() {
+    console.log("LOGOUT");
+    localStorage.removeItem("token");
+  }
+
 
   return (
 
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header userEmail={authInfo.data?.email} />
-              <Routes>
-                <Route path="/" element={<ProtectedRouteElement loggedIn={loggedIn} element={Main} navigateTo="/sign-up"
-                                          cards={cards}
-                                          onEditAvatar={handleEditAvatarClick}
-                                          onEditProfile={handleEditProfileClick}
-                                          onAddPlace={handleAddPlaceClick}
-                                          onCardClick={handleCardClick}
-                                          onCardLike={handleCardLike}
-                                          onCardDelete={handleCardDelete} />} />
-        
-                <Route path="/sign-up" element={<Register onSubmit={handleRegister} />} />
-                <Route path="/sign-in" element={<Login onSubmit={handleLogin} />} />
-            </Routes>
+        <Header userEmail={authInfo.data?.email} onLogout={handleLogout} />
+
+        <Routes>
+          <Route path="/" element={<ProtectedRouteElement loggedIn={loggedIn} element={Main} navigateTo="/sign-up"
+                                    cards={cards}
+                                    onEditAvatar={handleEditAvatarClick}
+                                    onEditProfile={handleEditProfileClick}
+                                    onAddPlace={handleAddPlaceClick}
+                                    onCardClick={handleCardClick}
+                                    onCardLike={handleCardLike}
+                                    onCardDelete={handleCardDelete} />} />
+          <Route path="/sign-up" element={<Register onSubmit={handleRegister} />} />
+          <Route path="/sign-in" element={<Login onSubmit={handleLogin} />} />
+        </Routes>
         
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
 
-            <PopupInfoTooltip isOpen={isPopupInfoTooltipCorrectOpen} onClose={closeAllPopups} title={"Вы успешно зарегистрированы!"} image={correct} />
-            <PopupInfoTooltip isOpen={isPopupInfoTooltipIncorrectOpen} onClose={closeAllPopups} title={"Что-то пошло не так! Попробуйте ещё раз."} image={incorrect} />
-
-        <PopupWithForm
-          name="delete"
-          title="Вы уверены?"
-          buttonTitle="Да"
-          isOpen={isDeletePlacePopupOpen}
-          onClose={closeAllPopups}
-        >
-        </PopupWithForm>
+        <PopupInfoTooltip isOpen={isPopupInfoTooltipCorrectOpen} onClose={closeAllPopups} title={"Вы успешно зарегистрированы!"} image={correct} />
+        <PopupInfoTooltip isOpen={isPopupInfoTooltipIncorrectOpen} onClose={closeAllPopups} title={"Что-то пошло не так! Попробуйте ещё раз."} image={incorrect} />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
-
+        
         <Footer />
       </CurrentUserContext.Provider>
     </div>
