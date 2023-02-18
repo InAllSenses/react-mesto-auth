@@ -5,7 +5,6 @@ import Footer from "./Footer";
 import Main from "./Main";
 import Register from "./Register.js";
 import Login from "./Login.js";
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
@@ -208,7 +207,6 @@ function App() {
   }
 
   function handleLogout() {
-    console.log("LOGOUT");
     localStorage.removeItem("token");
   }
 

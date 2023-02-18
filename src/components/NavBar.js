@@ -18,7 +18,7 @@ function NavBar(props) {
         <Route path={"/"} element={
             <div className="header__logged">
               <p className="header__status">{props.userEmail}</p>
-              <NavLink to="/sign-in" className="header__status" onClick={props.onLogout} >Выйти</NavLink>
+              <NavLink to="/sign-in" replace className="header__status" onClick={props.onLogout} >Выйти</NavLink>
             </div>
           } />
       </Routes>
