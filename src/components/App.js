@@ -220,7 +220,7 @@ function App() {
         <Header userEmail={authInfo.data?.email} onLogout={handleLogout} />
 
         <Routes>
-          <Route path="/" element={<ProtectedRouteElement loggedIn={loggedIn} element={Main} navigateTo="/sign-up"
+          <Route path="/" element={<ProtectedRouteElement loggedIn={loggedIn} element={Main} navigateTo="/sign-in"
                                     cards={cards}
                                     onEditAvatar={handleEditAvatarClick}
                                     onEditProfile={handleEditProfileClick}
@@ -240,7 +240,7 @@ function App() {
         <PopupInfoTooltip isOpen={isPopupInfoTooltipIncorrectOpen} onClose={closeAllPopups} title={"Что-то пошло не так! Попробуйте ещё раз."} image={incorrect} />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-        
+
         <Footer />
       </CurrentUserContext.Provider>
     </div>
