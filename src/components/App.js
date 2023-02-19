@@ -124,8 +124,6 @@ function App() {
   function handleLogin(email, password) {
     apiAuth.authorize(email, password)
     .then((data) => {
-      console.log(data);
-
       if (data.token) {
         localStorage.setItem("token", data.token);
         checkToken();
