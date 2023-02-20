@@ -45,6 +45,8 @@ function App() {
   const [ loggedIn, setLoggedIn ] = React.useState(false);
   const [authInfo, setAuthInfo] = React.useState({});
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -148,6 +150,7 @@ function App() {
   }
 
   function handleUpdateUser(newUserData) {
+    setIsLoading(true);
     api.patchUserInfo(newUserData)
     .then((result) => {
       setCurrentUser(result);
@@ -155,10 +158,14 @@ function App() {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      setIsLoading(false);
     });
   }
 
   function handleUpdateAvatar(newAvatarData) {
+    setIsLoading(true);
     api.patchAvatar(newAvatarData)
     .then((result) => {
       setCurrentUser(result);
@@ -166,6 +173,9 @@ function App() {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      setIsLoading(false);
     });
   }
 
@@ -194,6 +204,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(newCard) {
+    setIsLoading(true);
     api.postNewCard(newCard)
     .then((result) => {
       setCards([result, ...cards]);
@@ -201,6 +212,9 @@ function App() {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      setIsLoading(false);
     });
   }
 
@@ -228,9 +242,9 @@ function App() {
           <Route path="/sign-in" element={<Login onSubmit={handleLogin} />} />
         </Routes>
         
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} isLoading={isLoading} />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} isLoading={isLoading} />
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} isLoading={isLoading} />
 
         <PopupInfoTooltip isOpen={isPopupInfoTooltipCorrectOpen} onClose={closeAllPopups} title={"Вы успешно зарегистрированы!"} image={correct} />
         <PopupInfoTooltip isOpen={isPopupInfoTooltipIncorrectOpen} onClose={closeAllPopups} title={"Что-то пошло не так! Попробуйте ещё раз."} image={incorrect} />
