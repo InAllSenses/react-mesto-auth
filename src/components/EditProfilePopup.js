@@ -55,7 +55,7 @@ export default function EditProfilePopup(props) {
         onChange={onChangeName}
         value={name}
       />
-      <span className="popup__input-error input-name-error"></span>
+      <span className="popup__input-error input-name-error" />
       <input
         id="input-profession"
         type="text"
@@ -68,7 +68,7 @@ export default function EditProfilePopup(props) {
         onChange={onChangeDescription}
         value={description}
       />
-      <span className="popup__input-error input-profession-error"></span>
+      <span className="popup__input-error input-profession-error" />
     </PopupWithForm>
   );
 }

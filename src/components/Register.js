@@ -24,7 +24,7 @@ function handleSubmitForm(e) {
       <div className="sign-form">
         <div className="sign-form__container">
           <h1 className="sign-form__title">Регистрация</h1>
-          <form onSubmit={handleSubmitForm}>
+          <form onSubmit={handleSubmitForm} name="form-register">
             <input required id="email" name="email" type="email" placeholder="Email" className="sign-form__info" value={email} onChange={handleEmailChange} />
             <input required id="password" name="password" type="password" placeholder="Пароль" className="sign-form__info" value={password} onChange={handlePasswordChange} />
             <button type="submit" className="sign-form__up">Зарегистрироваться</button>

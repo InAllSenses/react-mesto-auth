@@ -49,7 +49,7 @@ export default function AddPlacePopup(props) {
         value={name}
         onChange={handleChangeName}
       />
-      <span className="popup__input-error input-place-error"></span>
+      <span className="popup__input-error input-place-error" />
       <input
         id="input-url"
         type="url"
@@ -60,7 +60,7 @@ export default function AddPlacePopup(props) {
         value={link}
         onChange={handleChangeLink}
       />
-      <span className="popup__input-error input-url-error"></span>
+      <span className="popup__input-error input-url-error" />
     </PopupWithForm>
   );
 }

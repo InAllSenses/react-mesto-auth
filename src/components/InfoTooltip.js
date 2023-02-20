@@ -10,8 +10,8 @@ function PopupInfoTooltip(props) {
           type="button"
           className="popup__close clickable-button"
           onClick={props.onClose}
-        ></button>
-        <img className="popup-infotooltip__result" src={props.image} alt="" />
+        />
+        <img className="popup-infotooltip__result" src={props.image} alt="значок авторизации" />
         <h1 className="popup-infotooltip__text">
           {props.title}
         </h1>

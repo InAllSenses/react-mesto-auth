@@ -40,7 +40,7 @@ export default function EditAvatarPopup(props) {
         ref={avatarRef}
         defaultValue={currentUser.avatar}
       />
-      <span className="popup__input-error input-avatar-error"></span>
+      <span className="popup__input-error input-avatar-error" />
     </PopupWithForm>
   );
 }

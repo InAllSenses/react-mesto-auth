@@ -14,7 +14,8 @@ import PopupInfoTooltip from "./InfoTooltip";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import ProtectedRouteElement from "./ProtectedRoute";
 
-import { api, apiAuth } from "../utils/Api";
+import api from "../utils/Api";
+import apiAuth from "../utils/Auth"
 
 import avatar from "../images/avatar.png";
 import correct from "../images/correct.svg";
@@ -72,7 +73,6 @@ function App() {
     if (token !== null) {
       apiAuth.checkToken(token)
       .then((data) => {
-        console.log(data);
         setAuthInfo(data);
         setLoggedIn(true);
         navigate("/", { replace: true });

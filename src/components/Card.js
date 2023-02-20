@@ -22,11 +22,11 @@ export default function Card(props) {
   }
 
   return (
-    <li key={props.data._id} className="element">
+    <li className="element">
       <img
         className="element__image clickable-button"
         src={props.data.link}
-        alt="фото"
+        alt="картинка поста"
         onClick={handleCardClick}
       />
       {isOwn && <button className="element__trashcan clickable-button" onClick={handlerDeleteClick} />}
@@ -37,7 +37,7 @@ export default function Card(props) {
             type="button"
             className={`element__heart clickable-button ${isLiked ? "element__heart_active" : ""}`}
             onClick={handleLikeClick}
-          ></button>
+          />
           <p className="element__like-count">{props.data.likes.length}</p>
         </div>
       </div>

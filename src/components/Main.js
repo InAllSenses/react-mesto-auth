@@ -15,7 +15,7 @@ function Main(props) {
             type="button"
             className="profile__avatar-edit clickable-button"
             onClick={props.onEditAvatar}
-          ></button>
+          />
           <img className="profile__image" src={currentUser.avatar} alt="аватар" />
         </div>
         <div className="profile__info">
@@ -25,7 +25,7 @@ function Main(props) {
               type="button"
               className="profile__edit clickable-button"
               onClick={props.onEditProfile}
-            ></button>
+            />
           </div>
           <p className="profile__subtitle">{currentUser.about}</p>
         </div>
@@ -33,7 +33,7 @@ function Main(props) {
           type="button"
           className="profile__add clickable-button"
           onClick={props.onAddPlace}
-        ></button>
+        />
       </section>
 
       <div className="elements page__elements">

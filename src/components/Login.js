@@ -22,7 +22,7 @@ function Login(props) {
       <div className="sign-form">
         <div className="sign-form__container">
           <h1 className="sign-form__title">Войти</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} name="form-login">
             <input
               required
               id="email"

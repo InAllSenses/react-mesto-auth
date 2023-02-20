@@ -8,11 +8,11 @@ function ImagePopup(props) {
           type="button"
           className="popup__close popup-image__close clickable-button"
           onClick={props.onClose}
-        ></button>
+        />
         <img
           className="popup-image__picture"
           src={props.card?.link}
-          alt="картинка не загрузилась"
+          alt="картинка поста"
         />
         <figcaption className="popup-image__title">
           {props.card?.name}
